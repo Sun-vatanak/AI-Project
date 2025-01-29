@@ -27,6 +27,8 @@ def get_user_by_email(email):
     return cursor.fetchone()
 
 
+
+
 def get_user_by_id(user_id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM `user` WHERE userid = %s', (user_id,))
@@ -35,7 +37,7 @@ def get_user_by_id(user_id):
 
 @app.route('/')
 def index():
-    if is_logged_in():
+    # if is_logged_in():
         user_details = {
             'name': session.get('name', 'Guest'),
             'role': session.get('role', 'User'),
@@ -43,7 +45,7 @@ def index():
             'userid': session.get('userid'),
         }
         return render_template('index.html', user=user_details)
-    return redirect(url_for('login'))
+    # return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
