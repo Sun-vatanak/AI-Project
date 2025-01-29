@@ -27,6 +27,8 @@ def get_user_by_email(email):
     return cursor.fetchone()
 
 
+
+
 def get_user_by_id(user_id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM `user` WHERE userid = %s', (user_id,))
