@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <title>Disboard</title>
+    <link class="icon_top" rel="icon" href="https://i.pinimg.com/736x/45/fc/04/45fc047a4d037ea0e090b341a46ff4e9.jpg" type="image/png">
 </head>
+<style>
+   .icon_top {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+    }
+</style>
 <body>
     <div class="flex flex-col bg-opacity-0">
         <header class="flex flex-col w-full max-md:max-w-full">
@@ -26,7 +34,11 @@
                   <a href="/contact">Contact</a>
                 </div>
                 <div class="flex gap-4 self-stretch text-base text-center bg-opacity-0">
-                  <a href="/login" class="px-5 py-3.5 text-green-600 whitespace-nowrap rounded-lg border border-green-600 border-solid bg-opacity-0" role="button">Login</a>
+                  <a href="/login" class="px-5 py-3.5 text-green-600 whitespace-nowrap rounded-lg border border-green-600 border-solid bg-opacity-0" role="button">
+
+                      <h1 class="dashboard-title"> {{ session['name'] }}</h1>
+                   
+                  </a>
                   <a href="/get-started" class="self-start px-4 pt-2.5 pb-5 text-white bg-green-600 rounded-lg" role="button">Get Started</a>
                 </div>
               </div>
