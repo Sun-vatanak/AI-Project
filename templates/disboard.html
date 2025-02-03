@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: #6B7280;
+            margin-right: 20px;
+        }
+
+        .stats-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .stats-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .air-quality-icon {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+        }
+
+        .water-quality-icon {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+        }
+
+        .waste-icon {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #F59E0B;
+        }
+
+        .trend-indicator {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .trend-up {
+            color: #10B981;
+        }
+
+        .trend-down {
+            color: #EF4444;
+        }
+
+        .progress {
+            height: 8px;
+            background-color: #E5E7EB;
+        }
+
+        .progress-bar-green {
+            background-color: #10B981;
+        }
+
+        .progress-bar-blue {
+            background-color: #3B82F6;
+        }
+
+        .progress-bar-orange {
+            background-color: #F59E0B;
+        }
+
+        .activities-table {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .status-critical {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
+
+        .status-completed {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+        }
+
+        .status-progress {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand">EcoExpert</span>
+            <div class="nav-items">
+                <a class="nav-link d-inline" href="#">Dashboard</a>
+                <a class="nav-link d-inline" href="#">Projects</a>
+                <a class="nav-link d-inline" href="#">Analytics</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <!-- Stats Cards Row -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-icon air-quality-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div>Air Quality Index</div>
+                    <h2>85</h2>
+                    <div class="trend-indicator trend-up">
+                        <i class="fas fa-arrow-up"></i> 1.2% vs last week
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-icon water-quality-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div>Water Quality</div>
+                    <h2>92%</h2>
+                    <div class="trend-indicator trend-up">
+                        <i class="fas fa-arrow-up"></i> 1.4% vs last week
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-icon waste-icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div>Waste Management</div>
+                    <h2>78%</h2>
+                    <div class="trend-indicator trend-down">
+                        <i class="fas fa-arrow-down"></i> 2.1% vs last week
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="stats-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="m-0">Environmental Impact Trends</h5>
+                        <select class="form-select" style="width: auto;">
+                            <option>Last 7 days</option>
+                        </select>
+                    </div>
+                    <div style="height: 300px; background-color: #f8f9fa; border-radius: 10px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h5 class="mb-4">Resource Consumption</h5>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Energy Usage</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-green" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Water Usage</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-blue" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Waste Reduction</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-orange" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities Table -->
+        <div class="activities-table">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="m-0">Recent Activities</h5>
+                <a href="#" class="text-decoration-none" style="color: #10B981;">View All</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Air Quality Alert</td>
+                        <td>Zone B-12</td>
+                        <td><span class="status-badge status-critical">Critical</span></td>
+                        <td>2 hours ago</td>
+                    </tr>
+                    <tr>
+                        <td>Water Treatment Check</td>
+                        <td>Plant 3</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td>5 hours ago</td>
+                    </tr>
+                    <tr>
+                        <td>Waste Collection</td>
+                        <td>Sector A-4</td>
+                        <td><span class="status-badge status-progress">In Progress</span></td>
+                        <td>8 hours ago</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

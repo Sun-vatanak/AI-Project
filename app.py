@@ -12,7 +12,7 @@ bcrypt = Bcrypt(app)
 app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')
 
 # Database Configuration using pymysql
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3307/aidb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3306/noted_java'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
