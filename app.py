@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy import text
 import re
 import os
+import requests  # Import the requests library
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -12,7 +13,7 @@ bcrypt = Bcrypt(app)
 app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')
 
 # Database Configuration using pymysql
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3306/noted_java'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@127.0.0.1:3307/aidb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -43,6 +44,14 @@ def get_user_by_id(user_id):
     result = db.session.execute(query, {"userid": user_id}).fetchone()
     return result
 
+# Fetch AQI data from the API
+def fetch_aqi_data():
+    api_url = "https://api.waqi.info/feed/A519430/?token=79efe7d14221d68775458db3276bbe11d1239df6"
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        return response.json()
+    return None
+
 # Home Page
 @app.route('/')
 def index():
@@ -71,10 +80,29 @@ def login():
             session['role'] = user.role
             session['email'] = user.email
             flash('Login successful', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('Dashboard'))
         else:
             flash('Invalid email or password!')
     return render_template('login.html')
+
+# Dashboard
+@app.route('/Dashboard')
+def Dashboard():
+    aqi_data = fetch_aqi_data()
+    if aqi_data and aqi_data['status'] == 'ok':
+        aqi = aqi_data['data']['aqi']
+    else:
+        aqi = 'N/A'  # Default value if API call fails
+
+    if is_logged_in():
+        user_details = {
+            'name': session.get('name', 'Guest'),
+            'role': session.get('role', 'User'),
+            'email': session.get('email', ''),
+            'userid': session.get('userid'),
+        }
+        return render_template('disboard.html', user=user_details, aqi=aqi)
+    return redirect(url_for('login'))
 
 # Logout
 @app.route('/logout')

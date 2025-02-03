@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,
+html {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.bg-container {
+    background: url("https://cdn.norton-u.com/nu/public_file/images/about/new%20campus.jpg")
+      no-repeat center center/cover;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.Ai  img{
+    width: 100%;
+    border-radius:  10px;
+    height: 430px;
+    object-fit: cover;
+}
+.fs-7{
+    font-size: 15px;
+}
