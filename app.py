@@ -45,12 +45,20 @@ def get_user_by_id(user_id):
     return result
 
 # Fetch AQI data from the API
+
 def fetch_aqi_data():
-    api_url = "https://api.waqi.info/feed/A519430/?token=79efe7d14221d68775458db3276bbe11d1239df6"
-    response = requests.get(api_url)
-    if response.status_code == 200:
+    api_url = "http://api.airvisual.com/v2/nearest_city?key=02513edd-d34b-4344-81b6-dab04ca2ca62"
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()  # Raise an error for bad status codes
         return response.json()
-    return None
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching AQI data: {e}")
+        return None
+@app.route('/get-aqi')
+def get_aqi():
+    aqi_data = fetch_aqi_data()
+    return aqi_data if aqi_data else {"error": "Unable to fetch AQI data"}
 
 # Home Page
 @app.route('/')
@@ -89,8 +97,9 @@ def login():
 @app.route('/Dashboard')
 def Dashboard():
     aqi_data = fetch_aqi_data()
+    print("AQI Data:", aqi_data)  # Debugging statement
     if aqi_data and aqi_data['status'] == 'ok':
-        aqi = aqi_data['data']['aqi']
+        aqi = aqi_data['data']['current']['pollution']['aqius']  # Correct path to AQI value
     else:
         aqi = 'N/A'  # Default value if API call fails
 
@@ -103,7 +112,6 @@ def Dashboard():
         }
         return render_template('disboard.html', user=user_details, aqi=aqi)
     return redirect(url_for('login'))
-
 # Logout
 @app.route('/logout')
 def logout():

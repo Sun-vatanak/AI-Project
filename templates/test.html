@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Air Quality Index (AQI) Data</h1>
+    <div id="aqi-data">
+        <!-- AQI data will be displayed here -->
+    </div>
+
+    <script>
+        function fetchAQIData() {
+            axios.get('/get-aqi')
+                .then(function (response) {
+                    const aqiData = response.data;
+                    const aqiDataElement = document.getElementById('aqi-data');
+                    if (aqiData.error) {
+                        aqiDataElement.innerHTML = `<p>${aqiData.error}</p>`;
+                    } else {
+                        const city = aqiData.data.city;
+                        const aqi = aqiData.data.current.pollution.aqius;
+                        aqiDataElement.innerHTML = `
+                            <p>City: ${city}</p>
+                            <p>AQI: ${aqi}</p>
+                        `;
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error fetching AQI data:', error);
+                });
+        }
+
+        // Fetch AQI data when the page loads
+        fetchAQIData();
+    </script>
+</body>
+</html>
